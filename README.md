@@ -1,4 +1,4 @@
-# are_you_bored
+# Are you bored?
 
 Flutter app that uses the Bored Api to display suggested activities.
 
