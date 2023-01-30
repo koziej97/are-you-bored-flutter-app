@@ -1,3 +1,4 @@
+import 'package:are_you_bored/presentation/loading_activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -22,6 +23,11 @@ class HomeScreen extends StatelessWidget {
       ),
       Align(
           alignment: FractionalOffset.center,
+          child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoadingActivityScreen()));
+          },
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             CircleAvatar(
                 radius: 126.0,
@@ -59,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w300)),
             ),
-          ])),
+          ])),),
       SlidingUpPanel(
           minHeight: 60,
           maxHeight: 300,
