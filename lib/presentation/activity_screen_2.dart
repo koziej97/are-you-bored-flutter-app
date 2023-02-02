@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-class ActivityScreen extends StatelessWidget {
-  const ActivityScreen({Key? key}) : super(key: key);
+class ActivityScreen2 extends StatelessWidget {
+  const ActivityScreen2({Key? key}) : super(key: key);
 
   final int backgroundTypeTest = 2;
   final bool hasLinkBool = true;
@@ -11,16 +10,18 @@ class ActivityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(fit: StackFit.expand, children: [
-      Container(
-        decoration: BoxDecoration(
-            color: const Color(0xffffffff),
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: getGradientColors(backgroundTypeTest))),
-      ),
-      Align(
+        body: Stack(
+      fit: StackFit.expand,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              color: const Color(0xffffffff),
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: getGradientColors(backgroundTypeTest))),
+        ),
+        Align(
           alignment: FractionalOffset.center,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Row(
@@ -75,23 +76,8 @@ class ActivityScreen extends StatelessWidget {
               image: getActivityImage("music"),
             ),
             const Padding(padding: EdgeInsets.only(top: 10.0)),
-            ClipRRect(
-                borderRadius: BorderRadius.circular(30.0),
-                child: Container(
-                    height: 185,
-                    width: 310,
-                    color: Colors.white,
-                    child: Center(
-                      child: Text(
-                          "Learn how to whistle with your fingers",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                                fontSize: 35.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400)),
-                      ),))),
-            hasLink(hasLinkBool),
+            hasLink(hasLinkBool, context),
+            const Padding(padding: EdgeInsets.only(top: 70.0)),
             Text(
               "Tap to get a random activity",
               textAlign: TextAlign.center,
@@ -101,10 +87,10 @@ class ActivityScreen extends StatelessWidget {
                       color: getTextColor(backgroundTypeTest),
                       fontWeight: FontWeight.w300)),
             ),
-                      ]
-                    ),
-                )],
-          ));
+          ]),
+        )
+      ],
+    ));
   }
 
   List<Color> getGradientColors(int backgroundType) {
@@ -125,30 +111,53 @@ class ActivityScreen extends StatelessWidget {
     }
   }
 
-  AssetImage getActivityImage(String activityType){
+  AssetImage getActivityImage(String activityType) {
     return AssetImage("assets/images/activity_icons/$activityType.png");
   }
 
-  Widget hasLink(bool hasLink){
+  Widget hasLink(bool hasLink, BuildContext context) {
     if (hasLink) {
-      return Column(
-          children: [
-              const Padding(padding: EdgeInsets.only(top: 20.0)),
-            ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                      "Open in browser",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.lato(
-                        textStyle: const TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400)),)
-              ),
-              const Padding(padding: EdgeInsets.only(top: 20.0))
-          ]);
+      return InkWell(
+          onTap: () {
+            const snackBar = SnackBar(
+              content: Text('TODO: open link in browser'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+          child: activityButton());
     } else {
-      return const Padding(padding: EdgeInsets.only(top: 70.0));
+      return activityButton();
     }
+  }
+
+  Widget activityButton() {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(30.0),
+        child: Container(
+            height: 185,
+            width: 310,
+            color: Colors.white,
+            child: Stack(children: [
+              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  "Learn how to whistle with your fingers",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                          fontSize: 35.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400)),
+                )
+              ]),
+              const Positioned(
+                bottom: 10,
+                right: 10,
+                child: Icon(
+                  Icons.open_in_browser,
+                  color: Colors.black,
+                  size: 30,
+                ),
+              )
+            ])));
   }
 }

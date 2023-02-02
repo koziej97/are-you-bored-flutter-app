@@ -1,14 +1,13 @@
-import 'package:are_you_bored/presentation/error_screen.dart';
-import 'package:are_you_bored/presentation/loading_activity_screen.dart';
+import 'package:are_you_bored/presentation/activity_screen_2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'activity_screen.dart';
 import 'sliding_up_panel_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ErrorScreen()));
+                      builder: (context) => const ActivityScreen2()));
             },
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
