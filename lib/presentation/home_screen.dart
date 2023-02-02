@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../data/model/activity_model.dart';
+import '../data/repository/activity_repository.dart';
 import 'activity_screen.dart';
 import 'sliding_up_panel_screen.dart';
 
@@ -25,10 +27,7 @@ class HomeScreen extends StatelessWidget {
         alignment: FractionalOffset.center,
         child: InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ActivityScreen2()));
+              getRandomActivity(context);
             },
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -78,5 +77,20 @@ class HomeScreen extends StatelessWidget {
           panel: Stack(
               fit: StackFit.expand, children: const [SlidingUpPanelScreen()]))
     ]));
+  }
+
+  getRandomActivity(BuildContext context) async {
+    ActivityRepository activityRepository = ActivityRepository();
+    ActivityModel? activityModel = await activityRepository.getRandomActivity();
+    if (activityModel != null){
+      moveToNextScreen(context, activityModel);
+    }
+  }
+
+  moveToNextScreen(BuildContext context, ActivityModel activityModel){
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ActivityScreen2(activity: activityModel)));
   }
 }
