@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ActivityScreen2 extends StatelessWidget {
-  const ActivityScreen2({Key? key}) : super(key: key);
+import '../data/model/activity_model.dart';
 
-  final int backgroundTypeTest = 2;
-  final bool hasLinkBool = true;
+class ActivityScreen2 extends StatelessWidget {
+  const ActivityScreen2({Key? key, required this.activity}) : super(key: key);
+  final ActivityModel activity;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ActivityScreen2 extends StatelessWidget {
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: getGradientColors(backgroundTypeTest))),
+                  colors: getGradientColors(activity.backgroundType))),
         ),
         Align(
           alignment: FractionalOffset.center,
@@ -33,16 +33,16 @@ class ActivityScreen2 extends StatelessWidget {
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
                           fontSize: 24.0,
-                          color: getTextColor(backgroundTypeTest),
+                          color: getTextColor(activity.backgroundType),
                           fontWeight: FontWeight.w400)),
                 ),
                 Text(
-                  "education",
+                  activity.type,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
                           fontSize: 24.0,
-                          color: getTextColor(backgroundTypeTest),
+                          color: getTextColor(activity.backgroundType),
                           fontWeight: FontWeight.w600)),
                 ),
               ],
@@ -57,26 +57,26 @@ class ActivityScreen2 extends StatelessWidget {
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
                           fontSize: 24.0,
-                          color: getTextColor(backgroundTypeTest),
+                          color: getTextColor(activity.backgroundType),
                           fontWeight: FontWeight.w400)),
                 ),
                 Text(
-                  "1",
+                  activity.participants.toString(),
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
                           fontSize: 24.0,
-                          color: getTextColor(backgroundTypeTest),
+                          color: getTextColor(activity.backgroundType),
                           fontWeight: FontWeight.w600)),
                 ),
               ],
             ),
             const Padding(padding: EdgeInsets.only(top: 14.0)),
             Image(
-              image: getActivityImage("music"),
+              image: getActivityImage(activity.type),
             ),
             const Padding(padding: EdgeInsets.only(top: 10.0)),
-            hasLink(hasLinkBool, context),
+            hasLink(hasLinkBool(activity), context),
             const Padding(padding: EdgeInsets.only(top: 70.0)),
             Text(
               "Tap to get a random activity",
@@ -84,7 +84,7 @@ class ActivityScreen2 extends StatelessWidget {
               style: GoogleFonts.lato(
                   textStyle: TextStyle(
                       fontSize: 20.0,
-                      color: getTextColor(backgroundTypeTest),
+                      color: getTextColor(activity.backgroundType),
                       fontWeight: FontWeight.w300)),
             ),
           ]),
@@ -130,6 +130,13 @@ class ActivityScreen2 extends StatelessWidget {
     }
   }
 
+  bool hasLinkBool(ActivityModel activityModel){
+    if (activityModel.link == ""){
+      return false;
+    }
+    return true;
+  }
+
   Widget activityButton() {
     return ClipRRect(
         borderRadius: BorderRadius.circular(30.0),
@@ -137,10 +144,14 @@ class ActivityScreen2 extends StatelessWidget {
             height: 185,
             width: 310,
             color: Colors.white,
+            // TODO - one line texts aren't centered
             child: Stack(children: [
-              Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                 Text(
-                  "Learn how to whistle with your fingers",
+                  activity.activity,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
                       textStyle: const TextStyle(
