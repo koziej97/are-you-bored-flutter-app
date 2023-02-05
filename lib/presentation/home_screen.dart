@@ -1,10 +1,7 @@
-import 'package:are_you_bored/presentation/activity_screen_2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../data/model/activity_model.dart';
-import '../data/repository/activity_repository.dart';
 import 'activity_screen.dart';
 import 'sliding_up_panel_screen.dart';
 
@@ -27,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         alignment: FractionalOffset.center,
         child: InkWell(
             onTap: () {
-              getRandomActivity(context);
+              moveToNextScreen(context);
             },
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -79,18 +76,10 @@ class HomeScreen extends StatelessWidget {
     ]));
   }
 
-  getRandomActivity(BuildContext context) async {
-    ActivityRepository activityRepository = ActivityRepository();
-    ActivityModel? activityModel = await activityRepository.getRandomActivity();
-    if (activityModel != null){
-      moveToNextScreen(context, activityModel);
-    }
-  }
-
-  moveToNextScreen(BuildContext context, ActivityModel activityModel){
+  moveToNextScreen(BuildContext context){
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ActivityScreen2(activity: activityModel)));
+            builder: (context) => const ActivityScreen()));
   }
 }

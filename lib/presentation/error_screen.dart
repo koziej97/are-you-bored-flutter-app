@@ -25,7 +25,7 @@ class ErrorScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                "We occurred an error during your request. Please check your internet connection or try again later.",
+                "An error occurred while loading your request. Please check your internet connection or try again later.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                     textStyle: const TextStyle(
