@@ -21,7 +21,6 @@ class ActivityModel {
     );
   }
 
-  // TODO - now it's not in use
   setupBackgroundType(ActivityModel activityModel) {
     if (activityModel.type == "education" || activityModel.type == "cooking" || activityModel.type == "recreational"){
       activityModel.backgroundType = 0;

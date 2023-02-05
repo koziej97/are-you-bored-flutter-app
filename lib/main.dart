@@ -1,8 +1,17 @@
-import 'package:are_you_bored/presentation/main_screen.dart';
+import 'package:are_you_bored/bloc/activity_bloc/activity_bloc.dart';
+import 'package:are_you_bored/data/repository/activity_repository.dart';
+import 'package:are_you_bored/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider<ActivityBloc>(
+                create: (BuildContext context) => ActivityBloc(ActivityRepository()))
+          ],
+          child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MainScreen(),
+      home:const HomeScreen(),
     );
   }
 }

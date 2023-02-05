@@ -8,7 +8,7 @@ class ActivityProvider {
     if (response.statusCode == 200){
       return response.body;
     } else {
-      return "error";
+      throw Exception("Failed to load activity");
     }
   }
 }
