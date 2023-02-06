@@ -1,5 +1,5 @@
 
-import 'package:are_you_bored/presentation/utilites/hardcoded_variales_for_home_screen.dart';
+import 'package:are_you_bored/presentation/utilities/hardcoded_variales_for_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
