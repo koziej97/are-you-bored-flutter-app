@@ -1,22 +1,11 @@
+
+import 'package:are_you_bored/presentation/utilites/hardcoded_variales_for_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'activity_screen.dart';
 
-List<String> list = <String>['Any', '1', '2', '3'];
-
-enum ActivityTypes {
-  education,
-  recreational,
-  social,
-  diy,
-  charity,
-  cooking,
-  relaxation,
-  music,
-  busywork
-}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _value = -1;
   List<String> activityTypes = ActivityTypes.values.map((e) => e.name).toList();
 
-  String dropdownValue = list.first;
+  String dropdownValue = participantsNumber.first;
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           dropdownValue = value!;
                         });
                       },
-                      items: list.map<DropdownMenuItem<String>>((String value) {
+                      items: participantsNumber.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
