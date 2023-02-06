@@ -1,7 +1,18 @@
+import 'package:are_you_bored/bloc/activity_bloc/activity_bloc.dart';
+import 'package:are_you_bored/data/repository/activity_repository.dart';
+import 'package:are_you_bored/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider<ActivityBloc>(
+                create: (BuildContext context) => ActivityBloc(ActivityRepository()))
+          ],
+          child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,42 +20,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Are you bored?',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'Hello world!',
-            ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home:const HomeScreen(),
     );
   }
 }
