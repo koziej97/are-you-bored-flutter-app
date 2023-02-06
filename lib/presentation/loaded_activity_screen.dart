@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../bloc/activity_bloc/activity_bloc.dart';
 import '../data/model/activity_model.dart';
@@ -132,11 +133,7 @@ class LoadedActivityScreen extends StatelessWidget {
     if (hasLink) {
       return InkWell(
           onTap: () {
-            // TODO - open link in browser
-            const snackBar = SnackBar(
-              content: Text('TODO: open link in browser'),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            _launchUrl(activity.link);
           },
           child: activityBoxWithLink());
     } else {
@@ -210,5 +207,12 @@ class LoadedActivityScreen extends StatelessWidget {
                     )
                   ]),
             ])));
+  }
+
+  Future<void> _launchUrl(String link) async {
+    final Uri url = Uri.parse(link);
+    if (!await launchUrl(url)){
+      throw Exception("Could not launch $link");
+    }
   }
 }
