@@ -23,7 +23,11 @@ class ActivityScreen extends StatelessWidget {
         return const LoadingActivityScreen();
       }
       if (state is ActivityLoadedState) {
-        return LoadedActivityScreen(activity: state.activity);
+        return LoadedActivityScreen(
+          activity: state.activity,
+          activityType: activityType,
+          participants: participants,
+        );
       }
       if (state is ActivityErrorState) {
         return const ErrorScreen();
