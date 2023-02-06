@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,8 @@ import '../bloc/activity_bloc/activity_bloc.dart';
 import '../data/model/activity_model.dart';
 
 class LoadedActivityScreen extends StatelessWidget {
-  const LoadedActivityScreen({Key? key, required this.activity, this.activityType, this.participants})
+  const LoadedActivityScreen(
+      {Key? key, required this.activity, this.activityType, this.participants})
       : super(key: key);
   final ActivityModel activity;
   final String? activityType;
@@ -32,8 +34,7 @@ class LoadedActivityScreen extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 BlocProvider.of<ActivityBloc>(context).add(LoadActivityEvent(
-                    activityType: activityType, participants: participants
-                ));
+                    activityType: activityType, participants: participants));
               },
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -156,21 +157,21 @@ class LoadedActivityScreen extends StatelessWidget {
             width: 310,
             color: Colors.white,
             alignment: AlignmentDirectional.center,
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Stack(children: [
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      activity.activity,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.lato(
-                          textStyle: const TextStyle(
-                              fontSize: 35.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400)),
-                    )
-                  ]),
+              Container(
+                  height: 170,
+                  width: 310,
+                  alignment: AlignmentDirectional.center,
+                  child: AutoSizeText(
+                    activity.activity,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                        textStyle: const TextStyle(
+                            fontSize: 35.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400)),
+                  )),
               const Positioned(
                 bottom: 10,
                 right: 10,
@@ -185,33 +186,28 @@ class LoadedActivityScreen extends StatelessWidget {
 
   Widget activityBox() {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(30.0),
-        child: Container(
-            height: 185,
-            width: 310,
-            color: Colors.white,
-            alignment: AlignmentDirectional.center,
-            child: Stack(children: [
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      activity.activity,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.lato(
-                          textStyle: const TextStyle(
-                              fontSize: 35.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400)),
-                    )
-                  ]),
-            ])));
+      borderRadius: BorderRadius.circular(30.0),
+      child: Container(
+          height: 185,
+          width: 310,
+          color: Colors.white,
+          alignment: AlignmentDirectional.center,
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: AutoSizeText(
+            activity.activity,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                    fontSize: 35.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400)),
+          )),
+    );
   }
 
   Future<void> _launchUrl(String link) async {
     final Uri url = Uri.parse(link);
-    if (!await launchUrl(url)){
+    if (!await launchUrl(url)) {
       throw Exception("Could not launch $link");
     }
   }
