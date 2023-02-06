@@ -19,7 +19,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
   Future<void> _onLoadActivityEvent(LoadActivityEvent event, Emitter<ActivityState> emit) async {
     emit(ActivityLoadingState());
     try {
-      final activity = await _activityRepository.getRandomActivity();
+      final activity = await _activityRepository.getRandomActivity(event.activityType, event.participants);
       emit(ActivityLoadedState(activity));
     } catch (e) {
       emit(ActivityErrorState());

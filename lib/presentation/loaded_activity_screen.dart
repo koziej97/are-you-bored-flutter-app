@@ -6,9 +6,11 @@ import '../bloc/activity_bloc/activity_bloc.dart';
 import '../data/model/activity_model.dart';
 
 class LoadedActivityScreen extends StatelessWidget {
-  const LoadedActivityScreen({Key? key, required this.activity})
+  const LoadedActivityScreen({Key? key, required this.activity, this.activityType, this.participants})
       : super(key: key);
   final ActivityModel activity;
+  final String? activityType;
+  final String? participants;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,9 @@ class LoadedActivityScreen extends StatelessWidget {
             alignment: FractionalOffset.center,
             child: InkWell(
               onTap: () {
-                BlocProvider.of<ActivityBloc>(context).add(LoadActivityEvent());
+                BlocProvider.of<ActivityBloc>(context).add(LoadActivityEvent(
+                    activityType: activityType, participants: participants
+                ));
               },
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
