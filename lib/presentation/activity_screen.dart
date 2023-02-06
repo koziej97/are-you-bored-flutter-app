@@ -30,7 +30,7 @@ class ActivityScreen extends StatelessWidget {
         );
       }
       if (state is ActivityErrorState) {
-        return const ErrorScreen();
+        return ErrorScreen(error: state.error);
       } else {
         return Container();
       }

@@ -13,4 +13,8 @@ class ActivityLoadedState extends ActivityState {
   ActivityLoadedState(this.activity);
 }
 
-class ActivityErrorState extends ActivityState {}
+class ActivityErrorState extends ActivityState {
+  final String error;
+
+  ActivityErrorState(this.error);
+}

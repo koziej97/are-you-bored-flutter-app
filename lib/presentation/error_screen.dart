@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({Key? key}) : super(key: key);
+  const ErrorScreen({Key? key, required this.error}) : super(key: key);
+  final String error;
 
   @override
   Widget build(BuildContext context) {
+    String errorText = "";
+    if (error == "Failed host lookup: 'www.boredapi.com'"){
+      errorText = "An error occurred while loading your request. Please check your internet connection or try again later.";
+    } else {
+      errorText = "Sorry, we don’t have an activity with specified type and number of participants. Please choose another configuration.";
+    }
+
     return Scaffold(
         body: Stack(fit: StackFit.expand, children: [
       Container(
@@ -25,7 +33,7 @@ class ErrorScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                "An error occurred while loading your request. Please check your internet connection or try again later.",
+                errorText,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
                     textStyle: const TextStyle(

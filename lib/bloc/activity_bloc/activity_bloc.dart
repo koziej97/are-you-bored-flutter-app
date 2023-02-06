@@ -22,7 +22,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState> {
       final activity = await _activityRepository.getRandomActivity(event.activityType, event.participants);
       emit(ActivityLoadedState(activity));
     } catch (e) {
-      emit(ActivityErrorState());
+      emit(ActivityErrorState(e.toString()));
     }
   }
 }
