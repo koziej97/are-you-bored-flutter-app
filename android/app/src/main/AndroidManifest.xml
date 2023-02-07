@@ -7,8 +7,10 @@
     </intent>
     </queries>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
-        android:label="are_you_bored"
+        android:label="Are you bored?"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
